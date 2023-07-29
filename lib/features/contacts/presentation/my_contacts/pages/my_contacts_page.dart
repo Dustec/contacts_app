@@ -1,4 +1,5 @@
 import 'package:contacts_app/features/contacts/presentation/contact_detail/pages/contact_detail_page.dart';
+import 'package:contacts_app/features/contacts/presentation/create_contact_page/pages/creaate_contact_provider.dart';
 
 import '../../../domain/models/contact.dart';
 import 'package:flutter/material.dart';
@@ -40,8 +41,15 @@ class MyContactsPage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          cubit.createContact();
+        onPressed: () async {
+          final Contact? createdContact = await Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const CreateContactProvider(),
+            ),
+          );
+          if (createdContact != null) {
+            cubit.addNewContact(createdContact);
+          }
         },
         child: const Icon(Icons.person_add),
       ),

@@ -38,6 +38,16 @@ class MyContactsCubit extends Cubit<MyContactsState> {
     ));
   }
 
+  void addNewContact(Contact contactAdded) {
+    final List<Contact> updatedContacts = [
+      ...state.contacts,
+      contactAdded,
+    ];
+    emit(state.copyWith(
+      contacts: updatedContacts,
+    ));
+  }
+
   Contact _getFakeContact() {
     // This method use faker to represent the creation of a Contact without any UI.
     // In a real world use case there should be a form to create a Contact.
